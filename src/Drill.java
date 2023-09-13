@@ -15,7 +15,7 @@ public class Drill {
      */
     public Drill(int numLines, int numPlayer, boolean goingRight, int startingLine) {
         this.numLines = numLines;
-        this.numPlayers = numPlayers;
+        this.numPlayers = numPlayer;
         this.goingRight = goingRight;
         currLine = startingLine;
         buildLines();
@@ -28,14 +28,41 @@ public class Drill {
      */
     public void runDrill() throws InterruptedException {
         int temp = numPlayers;
-        while (numPlayers!=0) {
+        while (temp!=0) {
             try {
                 passBall();
             } catch (NoBallException e) {
                 e.printStackTrace();
             }
-            Thread.sleep(100);
+            Thread.sleep(1000);
             printDrill();
+            System.out.println("\n\n\n\n\n");
+            temp--;
+        }
+    }
+
+    /**
+     * Prints the drill using * for players
+     * without the ball and # for the player with the ball.
+     */
+    public void printDrill() {
+        Player[] temp = new Player[lines.size()];
+        for (int i = 0 ; i < temp.length ; i++) {
+            temp[i] = lines.get(i).getLast();
+        }
+        int throughCount = 0;
+        while (throughCount < numLines) {
+            for (int i = 0 ; i < lines.size() ; i++) {
+                LinkedList<Player> curr = lines.get(i);
+                if (curr.getFirst().equals(temp[i]))
+                    throughCount++;
+                if (curr.getFirst().hasBall())
+                    System.out.print("#\t");
+                else
+                    System.out.print("*\t");
+                curr.add(curr.remove());
+            }
+            System.out.println();
         }
     }
 
@@ -64,8 +91,6 @@ public class Drill {
      * the first player of the adjacent line in the given direction.
      * If there are no more lines in the given direction, switch
      * the direction.
-     *
-     * @throws NoBallException
      */
     public void passBall() throws NoBallException{
         if (!lines.get(currLine).getFirst().hasBall())
@@ -76,17 +101,24 @@ public class Drill {
             if (currLine+1 == lines.size()) {
                 flipDirection();
                 passBall();
+                return;
             }
             next = lines.get(currLine+1);
         } else {
             if (currLine == 0) {
                 flipDirection();
                 passBall();
+                return;
             }
             next = lines.get(currLine-1);
         }
+        curr.getFirst().setHasBall(false);
         next.add(curr.remove());
         next.getFirst().setHasBall(true);
+        if (goingRight)
+            currLine++;
+        else
+            currLine--;
     }
 
     public void flipDirection() {
