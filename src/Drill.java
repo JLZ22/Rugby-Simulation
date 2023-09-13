@@ -26,7 +26,7 @@ public class Drill {
      * number of times. (eventually until every player
      * goes through every line)
      */
-    public void runDrill() {
+    public void runDrill() throws InterruptedException {
         int temp = numPlayers;
         while (numPlayers!=0) {
             try {
@@ -34,6 +34,8 @@ public class Drill {
             } catch (NoBallException e) {
                 e.printStackTrace();
             }
+            Thread.sleep(100);
+            printDrill();
         }
     }
 
