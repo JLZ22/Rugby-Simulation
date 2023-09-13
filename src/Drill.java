@@ -22,6 +22,22 @@ public class Drill {
     }
 
     /**
+     * Runs drill where players pass the ball numPlayer
+     * number of times. (eventually until every player
+     * goes through every line)
+     */
+    public void runDrill() {
+        int temp = numPlayers;
+        while (numPlayers!=0) {
+            try {
+                passBall();
+            } catch (NoBallException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
      * Adds the appropriate number of lines and players per line
      * to the global variable, lines.
      */
