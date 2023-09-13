@@ -27,7 +27,9 @@ public class Drill {
      * goes through every line)
      */
     public void runDrill() throws InterruptedException {
-        int temp = numPlayers;
+        int temp = 10;
+        printDrill();
+        System.out.println("\n\n\n\n\n");
         while (temp!=0) {
             try {
                 passBall();
@@ -47,20 +49,24 @@ public class Drill {
      */
     public void printDrill() {
         Player[] temp = new Player[lines.size()];
+        int max = lines.get(0).size();
         for (int i = 0 ; i < temp.length ; i++) {
             temp[i] = lines.get(i).getLast();
+            if (max < lines.get(i).size())
+                max = lines.get(i).size();
+            System.out.print((i+1) + "\t");
         }
-        int throughCount = 0;
-        while (throughCount < numLines) {
-            for (int i = 0 ; i < lines.size() ; i++) {
-                LinkedList<Player> curr = lines.get(i);
-                if (curr.getFirst().equals(temp[i]))
-                    throughCount++;
-                if (curr.getFirst().hasBall())
+        System.out.println();
+        for (int i = 0 ; i < max ; i++) {
+            for (LinkedList<Player> curr : lines) {
+                if (curr.size() <= i) {
+                    System.out.print(" \t");
+                    continue;
+                }
+                if (curr.get(i).hasBall())
                     System.out.print("#\t");
                 else
                     System.out.print("*\t");
-                curr.add(curr.remove());
             }
             System.out.println();
         }
