@@ -1,12 +1,16 @@
 import java.util.*;
 public class Drill {
+    private int currLine;
+    private boolean goingRight;
     private int numPlayers;
     private int numLines;
     private final ArrayList<LinkedList<Player>> lines = new ArrayList<>();
 
-    public Drill(int numLines, int numPlayers) {
+    public Drill(int numLines, int numPlayer, boolean goingRight, int startingLine) {
         this.numLines = numLines;
         this.numPlayers = numPlayers;
+        this.goingRight = goingRight;
+        currLine = startingLine;
         buildLines();
     }
 
@@ -27,6 +31,41 @@ public class Drill {
             x--;
             index++;
         }
+        lines.get(0).getFirst().setHasBall(true);
+    }
+
+    /**
+     * Passes the ball from the first player of one line to
+     * the first player of the adjacent line in the given direction.
+     * If there are no more lines in the given direction, switch
+     * the direction.
+     *
+     * @throws NoBallException
+     */
+    public void passBall() throws NoBallException{
+        if (!lines.get(currLine).getFirst().hasBall())
+            throw new NoBallException();
+        LinkedList<Player> curr = lines.get(currLine);
+        LinkedList<Player> next;
+        if (goingRight) {
+            if (currLine+1 == lines.size()) {
+                flipDirection();
+                passBall();
+            }
+            next = lines.get(currLine+1);
+        } else {
+            if (currLine == 0) {
+                flipDirection();
+                passBall();
+            }
+            next = lines.get(currLine-1);
+        }
+        next.add(curr.remove());
+        next.getFirst().setHasBall(true);
+    }
+
+    public void flipDirection() {
+        goingRight = !goingRight;
     }
 
     public ArrayList<LinkedList<Player>> getLines() {

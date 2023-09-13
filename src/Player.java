@@ -1,7 +1,7 @@
 public class Player {
     private boolean hasBall;
 
-    public boolean isHasBall() {
+    public boolean hasBall() {
         return hasBall;
     }
 
