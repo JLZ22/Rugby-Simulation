@@ -48,10 +48,8 @@ public class Drill {
      * without the ball and # for the player with the ball.
      */
     public void printDrill() {
-        Player[] temp = new Player[lines.size()];
         int max = lines.get(0).size();
-        for (int i = 0 ; i < temp.length ; i++) {
-            temp[i] = lines.get(i).getLast();
+        for (int i = 0 ; i < lines.size() ; i++) {
             if (max < lines.get(i).size())
                 max = lines.get(i).size();
             System.out.print((i+1) + "\t");
@@ -77,6 +75,7 @@ public class Drill {
      * to the global variable, lines.
      */
     public void buildLines() {
+        lines.clear();
         for (int i = 0 ; i < numLines ; i++) {
             lines.add(new LinkedList<>());
         }
@@ -89,7 +88,7 @@ public class Drill {
             x--;
             index++;
         }
-        lines.get(0).getFirst().setHasBall(true);
+        lines.get(currLine).getFirst().setHasBall(true);
     }
 
     /**
