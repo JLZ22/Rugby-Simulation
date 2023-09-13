@@ -6,6 +6,13 @@ public class Drill {
     private int numLines;
     private final ArrayList<LinkedList<Player>> lines = new ArrayList<>();
 
+    /**
+     * Constructor
+     * @param numLines > 1
+     * @param numPlayer >= numLines
+     * @param goingRight Direction the ball is going
+     * @param startingLine < numLines
+     */
     public Drill(int numLines, int numPlayer, boolean goingRight, int startingLine) {
         this.numLines = numLines;
         this.numPlayers = numPlayers;
