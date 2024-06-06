@@ -13,6 +13,14 @@ The ball starts on the leftmost line.
 5. the player who just passed the ball goes to the end of the adjacent left line
 6. repeat steps 1-6
 
+Below is a diagram of the drill running where the ball is passed 4 times (`-n->` indicates the n-th iteration). Each column is a line of players where each number is a unique player. A number with `b` immediately after it represents the player with the ball. For example, `1b` means player 1 has the ball. In the example below, the ball starts with player one who is the first player in the leftmost column. Player 4 is the second player in the leftmost column. Player 2 is the first player in the middle column.  
+```
+1b 2 3        4 2b 3        4 5 3b       4 5b 6        4b 8 6
+4  5 6  -1->  7 5  6  -2->  7 8 6  -3->  7 8  9  -4->  7  1 9
+7  8 9          8  9          1 9          1  2        5  3 2
+                1               2          3
+```
+
 ## Problem
 
 ## Approach
