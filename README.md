@@ -3,7 +3,7 @@
 ## Packages
 
 ```
-numpy
+
 ```
 
 ## Context
