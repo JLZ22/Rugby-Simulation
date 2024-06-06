@@ -1,5 +1,11 @@
 # Rugby Simulation
 
+## Packages
+
+```
+numpy
+```
+
 ## Context
 
 In rugby, a common drill to warm up is "infinite passing". This is a drill where players will line up in `n` lines (typically no more than 5 or 6) and pass the ball according to the following algoirthm. 
