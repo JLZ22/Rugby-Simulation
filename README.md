@@ -4,13 +4,13 @@
 
 In rugby, a common drill to warm up is "infinite passing". This is a drill where players will line up in `n` lines (typically no more than 5 or 6) and pass the ball according to the following algoirthm. 
 
-The ball starts on the rightmost line. 
+The ball starts on the leftmost line. 
 
-1. the player with the ball passes to the adjacent left line
-2. the player who just passed the ball goes to the end of the adjacent left line
-3. repeat steps 1 and 2 until the ball reaches the leftmost line
-4. the player with the ball passes to the adjacent right line 
-5. the player who just passed the ball goes to the end of the adjacent right line
+1. the player with the ball passes to the adjacent right line
+2. the player who just passed the ball goes to the end of the adjacent right line
+3. repeat steps 1 and 2 until the ball reaches the rightmost line
+4. the player with the ball passes to the adjacent left line 
+5. the player who just passed the ball goes to the end of the adjacent left line
 6. repeat steps 1-6
 
 ## Problem
