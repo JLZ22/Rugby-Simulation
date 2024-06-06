@@ -5,19 +5,21 @@ class Player:
 
 class Drill:
   
-  def __init__(self, numLines: int, numPlayers: int, direction: str, startingLine: int):
-    if (startingLine >= numLines):
-      raise Exception('Your starting line is larger than the number of lines in this drill.')
+  def __init__(self, numLines: int, numPlayers: int):
+    assert(numLines < numPlayers, "Number of lines must be less than number of players")
+    assert(numLines > 0, "Number of lines must be greater than 0")
     self.numLines = numLines
     self.numPlayers = numPlayers
-    self.direction = -1 if direction == 'left' else 1
-    self.startingLine = startingLine
-    self.currentLine = startingLine
-    self.lines = [[None] for i in range(numLines)]
+    self.direction = 'left'
+    self.startingLine = 0
+    self.currentLine = 0
+    self.lines = [[] for i in range(numLines)]
+    self.buildLines()
+    print(self.lines)
     
-    '''
-    Runs drill where players pass the ball n times.
-    '''
+  '''
+  Runs drill where players pass the ball n times.
+  '''
   def runDrill(self, n: int):
     pass
   
@@ -26,14 +28,22 @@ class Drill:
   # for players with the ball.
   '''
   def printDrill(self):
-    pass
+    for line in self.lines:
+      for player in line:
+        if player.hasBall:
+          print('#', end=' ')
+        else:
+          print('*', end=' ')
+      print()
   
   '''
   Divides the players as evenly as possible into 
   numLines # of lines.
   '''
   def buildLines(self):
-    pass
+    for i in range(self.numPlayers):
+      self.lines[i % self.numLines].append(Player())
+    self.lines[self.startingLine][0].hasBall = True
   
   '''
   Passes the ball from one line to the other in the direction 
@@ -43,4 +53,7 @@ class Drill:
     pass
   
   def flipDirection(self):
-    self.direction = -1 * self.direction
+    if self.direction == 'left':
+      self.direction = 'right'
+    else:  
+      self.direction = 'left'
