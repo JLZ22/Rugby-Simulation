@@ -1,6 +1,9 @@
 class Player: 
-  def __init__(self):
+  def __init__(self, currentLine):
     self.hasBall = False
+    self.currentLine = currentLine
+    self.previousLine = None
+    self.oscillation_count = 0
 
 class Drill:
   def __init__(self, numLines: int, numPlayers: int):
@@ -8,7 +11,7 @@ class Drill:
     assert(numLines > 0, "Number of lines must be greater than 0")
     self.numLines = numLines
     self.numPlayers = numPlayers
-    self.direction = 'left'
+    self.direction = 'right'
     self.startingLine = 0 # The line that starts with the ball
     self.currentLine = 0 # The line that has the ball
     self.lines = [[] for i in range(numLines)] # array of lines
@@ -55,7 +58,7 @@ class Drill:
   '''
   def buildLines(self):
     for i in range(self.numPlayers):
-      self.lines[i % self.numLines].append(Player())
+      self.lines[i % self.numLines].append(Player(i))
     self.lines[self.startingLine][0].hasBall = True
   
   '''
@@ -65,20 +68,34 @@ class Drill:
   def passBall(self):
     if self.isLastLine():
       self.flipDirection()
+
     if self.direction == 'left':
-      self.lines[self.currentLine][0].hasBall = False
-      self.currentLine -= 1
-      if not self.lines[self.currentLine]:
-        raise Exception(f"Line {self.currentLine} is empty! Player in line {self.currentLine + 1} are passing to no one!")
-      self.lines[self.currentLine][0].hasBall = True
-      self.lines[self.currentLine].append(self.lines[self.currentLine + 1].pop(0))
+      self.movePlayer(self.currentLine, self.currentLine - 1)
     else:
-      self.lines[self.currentLine][0].hasBall = False
-      self.currentLine += 1
-      if not self.lines[self.currentLine]:
-        raise Exception(f"Line {self.currentLine} is empty! Player in line {self.currentLine - 1} are passing to no one!")
-      self.lines[self.currentLine][0].hasBall = True
-      self.lines[self.currentLine].append(self.lines[self.currentLine - 1].pop())
+      self.movePlayer(self.currentLine, self.currentLine + 1)
+
+  '''
+  Move the first player in the passLine to the end of recieveLine.
+  '''
+  def movePlayer(self, passLine: int, recieveLine: int):
+    if not self.lines[recieveLine]:
+      raise Exception(f"Line {recieveLine} is empty! Player in line {passLine + 1} is passing to no one!")
+    
+    # the current player in the start line no longer has the ball
+    self.lines[passLine][0].hasBall = False
+    
+    # update the number of times the player has oscillated
+    if self.lines[passLine][0].previousLine == recieveLine:
+      self.lines[passLine][0].oscillation_count += 1
+
+    # update the previous and current line of the player
+    self.lines[passLine][0].previousLine = passLine
+    self.lines[passLine][0].currentLine = recieveLine
+
+    # move the player to the end of the line they just passed to
+    self.lines[recieveLine].append(self.lines[passLine].pop(0))
+    # the player in the reciving line now has the ball
+    self.lines[recieveLine][0].hasBall = True
 
   def isLastLine(self):
     if self.direction == 'left':
