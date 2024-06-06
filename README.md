@@ -23,6 +23,8 @@ Below is a diagram of the drill running where the ball is passed 4 times (`-n->`
 
 ## Problem
 
+TODO
+
 ## Approach
-- Simulates a rugby drill in which players are in 2+ lines and pass the ball to one of the adjacent lines before switching
-- perform brute force to see if the current number of players and lines will lead to a player being stuck oscillating between two lines
+
+TODO
