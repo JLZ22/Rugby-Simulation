@@ -79,8 +79,11 @@ class Drill:
   '''
   def movePlayer(self, passLine: int, recieveLine: int):
     if not self.lines[recieveLine]:
-      raise Exception(f"Line {recieveLine} is empty! Player in line {passLine + 1} is passing to no one!")
+      raise Exception(f"Line {recieveLine + 1} is empty! Player in line {passLine + 1} is passing to no one!")
     
+    if not self.lines[passLine]:
+      raise Exception(f"Line {passLine + 1} is empty! Player in line {recieveLine + 1} is recieving from no one!")
+
     # the current player in the start line no longer has the ball
     self.lines[passLine][0].hasBall = False
     
@@ -96,6 +99,8 @@ class Drill:
     self.lines[recieveLine].append(self.lines[passLine].pop(0))
     # the player in the reciving line now has the ball
     self.lines[recieveLine][0].hasBall = True
+
+    self.currentLine = recieveLine
 
   def isLastLine(self):
     if self.direction == 'left':
