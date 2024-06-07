@@ -13,7 +13,7 @@ class Drill:
     self.numPlayers = numPlayers
     self.direction = 'right'
     self.startingLine = 0 # The line that starts with the ball
-    self.currentLine = 0 # The line that has the ball
+    self.line_with_ball = 0 # The line that has the ball
     self.lines = [[] for i in range(numLines)] # array of lines
     self.buildLines() # Distribute players into lines
     
@@ -70,9 +70,9 @@ class Drill:
       self.flipDirection()
 
     if self.direction == 'left':
-      self.movePlayer(self.currentLine, self.currentLine - 1)
+      self.movePlayer(self.line_with_ball, self.line_with_ball - 1)
     else:
-      self.movePlayer(self.currentLine, self.currentLine + 1)
+      self.movePlayer(self.line_with_ball, self.line_with_ball + 1)
 
   '''
   Move the first player in the passLine to the end of recieveLine.
@@ -100,13 +100,13 @@ class Drill:
     # the player in the reciving line now has the ball
     self.lines[recieveLine][0].hasBall = True
 
-    self.currentLine = recieveLine
+    self.line_with_ball = recieveLine
 
   def isLastLine(self):
     if self.direction == 'left':
-      return self.currentLine == 0
+      return self.line_with_ball == 0
     else:
-      return self.currentLine == self.numLines - 1
+      return self.line_with_ball == self.numLines - 1
   
   def flipDirection(self):
     if self.direction == 'left':
