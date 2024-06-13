@@ -8,7 +8,7 @@
 
 ## Context
 
-In rugby, a common drill to warm up is "infinite passing". This is a drill where players will line up in `n` lines (typically no more than 5 or 6) and pass the ball according to the following algoirthm. 
+In rugby, a common drill to warm up is "infinite passing". This is a drill where players will line up in lines (typically no more than 5 or 6) and pass the ball according to the following algoirthm. 
 
 The ball starts on the leftmost line. 
 
@@ -34,4 +34,4 @@ A common occurence in this drill is that one or more players will be stuck oscil
 
 ## Approach
 
-1. gaTo gain intuition on the problem and potentially observe patterns, I am starting with a brute force approach where I am keeping track of which players oscillate. 
+1. To gain intuition on the problem and potentially observe patterns, I am starting with a brute force approach where I am keeping track of which players oscillate. 
