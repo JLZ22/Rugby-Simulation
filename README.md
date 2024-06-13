@@ -34,4 +34,4 @@ A common occurence in this drill is that one or more players will be stuck oscil
 
 ## Approach
 
-To gain intuition on the problem and potentially observe patterns, I am brute forcing this problem and keeping track of which players oscillate. 
+1. gaTo gain intuition on the problem and potentially observe patterns, I am starting with a brute force approach where I am keeping track of which players oscillate. 
