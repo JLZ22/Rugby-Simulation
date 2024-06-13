@@ -1,20 +1,22 @@
+import utils 
+
 class Player: 
   def __init__(self, currentLine, id):
     self.id = id
     self.hasBall = False
     self.currentLine = currentLine
     self.previousLine = None
-    self.oscillation_count = 0
+    self.oscillationCount = 0
 
 class Drill:
   def __init__(self, numLines: int, numPlayers: int):
-    assert(numLines < numPlayers, "Number of lines must be less than number of players")
-    assert(numLines > 0, "Number of lines must be greater than 0")
+    assert numLines < numPlayers, "Number of lines must be less than number of players"
+    assert numLines > 0, "Number of lines must be greater than 0"
     self.numLines = numLines
     self.numPlayers = numPlayers
     self.direction = 'right'
     self.startingLine = 0 # The line that starts with the ball
-    self.line_with_ball = 0 # The line that has the ball
+    self.lineWithBall = 0 # The line that has the ball
     self.lines = [[] for i in range(numLines)] # array of lines
     self.buildLines() # Distribute players into lines
     
@@ -31,34 +33,31 @@ class Drill:
   Prints the drill using * for players without the ball and 
   # for players with the ball.
   '''
-  def printDrill(self, n: int = -1):
-    if n != -1:
-      print(f"Iteration {n}:")
-    else:
-      print("Drill:")
-    
+  def printDrill(self, iteration: int = -1):
+    utils.printBlue(utils.boldText(f"Iteration {iteration}:" if iteration != -1 else "Drill:"))
+
     for i in range(self.numLines):
-      print(i+1, end=" ")
+        txt = utils.underlineText( f"Line {i + 1}:")
+        print(f"{txt:<18}", end=" ")
     print()
-    lens = [len(line) for line in self.lines]
-    maxLen = max(lens)
-    for i in range(maxLen):
+
+    max_len = max(len(line) for line in self.lines)
+    for i in range(max_len):
       for j in range(self.numLines):
-        if i < lens[j]:
-          if self.lines[j][i].hasBall:
-            print("#", end=" ")
-          else:
-            print("*", end=" ")
-        else:
-          print(" ", end=" ")
+        symbol = ""
+        if i < len(self.lines[j]):
+          player = self.lines[j][i]
+          symbol = f"{player.id}b" if player.hasBall else player.id
+        print(f"{symbol:<11}", end="")
       print()
+    print()
   
   '''
   Divides the players as evenly as possible into 
   numLines # of lines.
   '''
   def buildLines(self):
-    id = 0
+    id = 1
     for i in range(self.numPlayers):
       self.lines[i % self.numLines].append(Player(i, id))
       id += 1
@@ -73,9 +72,9 @@ class Drill:
       self.flipDirection()
 
     if self.direction == 'left':
-      self.movePlayer(self.line_with_ball, self.line_with_ball - 1)
+      self.movePlayer(self.lineWithBall, self.lineWithBall - 1)
     else:
-      self.movePlayer(self.line_with_ball, self.line_with_ball + 1)
+      self.movePlayer(self.lineWithBall, self.lineWithBall + 1)
 
   '''
   Move the first player in the passLine to the end of recieveLine.
@@ -92,7 +91,7 @@ class Drill:
     
     # update the number of times the player has oscillated
     if self.lines[passLine][0].previousLine == recieveLine:
-      self.lines[passLine][0].oscillation_count += 1
+      self.lines[passLine][0].oscillationCount += 1
 
     # update the previous and current line of the player
     self.lines[passLine][0].previousLine = passLine
@@ -103,13 +102,13 @@ class Drill:
     # the player in the reciving line now has the ball
     self.lines[recieveLine][0].hasBall = True
 
-    self.line_with_ball = recieveLine
+    self.lineWithBall = recieveLine
 
   def isLastLine(self):
     if self.direction == 'left':
-      return self.line_with_ball == 0
+      return self.lineWithBall == 0
     else:
-      return self.line_with_ball == self.numLines - 1
+      return self.lineWithBall == self.numLines - 1
   
   def flipDirection(self):
     if self.direction == 'left':
