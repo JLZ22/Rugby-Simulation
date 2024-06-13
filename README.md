@@ -29,8 +29,9 @@ Below is a diagram of the drill running where the ball is passed 4 times (`-n->`
 
 ## Problem
 
-TODO
+A common occurence in this drill is that one or more players will be stuck oscillating between two lines. This happens to a player (let's name him Jeff) if he passes the ball and goes to the end of a line with an odd number of players. If we were to have 5 lines of 3 where Jeff is the first player in the first line, he would not travel all the way down the 5 lines before revisiting the first line because the line he is entering (line 2) has 3 people. As such, he would return to line 1 on his next turn. 
+
 
 ## Approach
 
-TODO
+To gain intuition on the problem and potentially observe patterns, I am brute forcing this problem and keeping track of which players oscillate. 

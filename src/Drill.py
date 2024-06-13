@@ -1,5 +1,6 @@
 class Player: 
-  def __init__(self, currentLine):
+  def __init__(self, currentLine, id):
+    self.id = id
     self.hasBall = False
     self.currentLine = currentLine
     self.previousLine = None
@@ -57,8 +58,10 @@ class Drill:
   numLines # of lines.
   '''
   def buildLines(self):
+    id = 0
     for i in range(self.numPlayers):
-      self.lines[i % self.numLines].append(Player(i))
+      self.lines[i % self.numLines].append(Player(i, id))
+      id += 1
     self.lines[self.startingLine][0].hasBall = True
   
   '''
