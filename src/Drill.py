@@ -34,7 +34,7 @@ class Drill:
   # for players with the ball.
   '''
   def printDrill(self, iteration: int = -1):
-    utils.printBlue(utils.boldText(f"Iteration {iteration}:" if iteration != -1 else "Drill:"))
+    utils.printBlue(utils.boldText(f"Iteration {iteration}:" if iteration != -1 else "Initial State:"))
 
     for i in range(self.numLines):
         txt = utils.underlineText( f"Line {i + 1}:")
@@ -104,14 +104,36 @@ class Drill:
 
     self.lineWithBall = recieveLine
 
+  '''
+  checks if the line with the ball is the last line
+  '''
   def isLastLine(self):
     if self.direction == 'left':
       return self.lineWithBall == 0
     else:
       return self.lineWithBall == self.numLines - 1
   
+  '''
+  flips the direction of the drill
+  '''
   def flipDirection(self):
     if self.direction == 'left':
       self.direction = 'right'
     else:  
       self.direction = 'left'
+
+  def printOsicllations(self):
+    players = self.getAndSortPlayers()
+    for player in players:
+      if player.oscillationCount > 0:
+        utils.printRed(f"Player {player.id} oscillated {player.oscillationCount} times.")
+      else:
+        utils.printGreen(f"Player {player.id} did not oscillate.")
+
+  def getAndSortPlayers(self):
+    players = []
+    for line in self.lines:
+      for player in line:
+        players.append(player)
+    players.sort(key=lambda x: x.id)
+    return players
