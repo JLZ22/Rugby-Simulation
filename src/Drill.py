@@ -90,7 +90,8 @@ class Drill:
     self.lines[passLine][0].hasBall = False
     
     # update the number of times the player has oscillated
-    if self.lines[passLine][0].previousLine == recieveLine:
+    if (not (passLine == 0 or passLine == self.numLines - 1) and
+         self.lines[passLine][0].previousLine == recieveLine):
       self.lines[passLine][0].oscillationCount += 1
 
     # update the previous and current line of the player
