@@ -55,16 +55,6 @@ Line 1:    Line 2:    Line 3:
 4b         8          6          
 7          1          9          
 5          3          2          
-
-Player 1 did not oscillate.
-Player 2 did not oscillate.
-Player 3 did not oscillate.
-Player 4 did not oscillate.
-Player 5 did not oscillate.
-Player 6 did not oscillate.
-Player 7 did not oscillate.
-Player 8 did not oscillate.
-Player 9 did not oscillate.
 ```
 
 ## Problem
