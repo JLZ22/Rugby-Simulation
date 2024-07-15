@@ -1,4 +1,5 @@
 import utils 
+import argparse
 
 class Player: 
   def __init__(self, currentLine, id):
@@ -149,3 +150,14 @@ class Drill:
         players.append(player)
     players.sort(key=lambda x: x.id)
     return players
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Run a drill.')
+    parser.add_argument("lines", type=int, help='Number of lines', default=3)
+    parser.add_argument("players", type=int, help='Number of players', default=9)
+    parser.add_argument("-p", type=int, help='Number of passes', default=40)
+    args = parser.parse_args()
+
+    drill = Drill(args.lines, args.players)
+    drill.runDrill(args.p)
+    drill.printOsicllations()
