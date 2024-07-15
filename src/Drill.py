@@ -2,7 +2,7 @@ import utils
 import argparse
 
 class Player: 
-  def __init__(self, currentLine, id):
+  def __init__(self, currentLine: int, id):
     self.id = id
     self.hasBall = False
     self.currentLine = currentLine
@@ -24,11 +24,15 @@ class Drill:
   '''
   Runs drill where players pass the ball n times.
   '''
-  def runDrill(self, n: int, color_ball = True):
+  def runDrill(self, 
+               n: int, 
+               color_ball = True, 
+               verbose = True):
     self.printDrill()
     for i in range(n):
       self.passBall()
-      self.printDrill(i+1, color_ball)
+      if verbose:
+        self.printDrill(i+1, color_ball)
   
   '''
   Prints the drill using * for players without the ball and 
@@ -43,19 +47,28 @@ class Drill:
     print()
 
     max_len = max(len(line) for line in self.lines)
+    # iterate through the length of the longest line
     for i in range(max_len):
+      # iterate through the number of lines
       for j in range(self.numLines):
+        # print the player id if the line has a player at that index
         if i < len(self.lines[j]):
           player = self.lines[j][i]
-          symbol = f"{player.id:<11}"
+          symbol = f"{player.id}"
           if player.hasBall:
             if color_ball:
-              utils.printYellow(f"{symbol}", end="")
+              utils.printYellow(f"{symbol:<11}", end="")
             else:
-              print(f"{symbol}b", end="")
+              print(f"{symbol:<11}b", end="")
           else:
-            print(f"{symbol}", end="")
+            print(f"{symbol:<11}", end="")
+        # print nothing if the line does not have a player at that index
+        else:
+          print(" "*11, end="")
+      # separate rows
       print()
+
+    # new line for appearance
     print()
   
   '''
@@ -92,20 +105,23 @@ class Drill:
     if not self.lines[passLine]:
       raise Exception(f"Line {passLine + 1} is empty! Player in line {recieveLine + 1} is recieving from no one!")
 
+    curr_player = self.lines[passLine][0]
+
     # the current player in the start line no longer has the ball
-    self.lines[passLine][0].hasBall = False
+    curr_player.hasBall = False
     
     # update the number of times the player has oscillated
     if (not (passLine == 0 or passLine == self.numLines - 1) and
-         self.lines[passLine][0].previousLine == recieveLine):
-      self.lines[passLine][0].oscillationCount += 1
+         curr_player.previousLine == recieveLine):
+      curr_player.oscillationCount += 1
 
     # update the previous and current line of the player
-    self.lines[passLine][0].previousLine = passLine
-    self.lines[passLine][0].currentLine = recieveLine
+    self.lines[passLine].pop(0)
+    curr_player.previousLine = passLine
+    curr_player.currentLine = recieveLine
 
     # move the player to the end of the line they just passed to
-    self.lines[recieveLine].append(self.lines[passLine].pop(0))
+    self.lines[recieveLine].append(curr_player)
     # the player in the reciving line now has the ball
     self.lines[recieveLine][0].hasBall = True
 
@@ -153,8 +169,17 @@ class Drill:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run a drill.')
-    parser.add_argument("lines", type=int, help='Number of lines', default=3)
-    parser.add_argument("players", type=int, help='Number of players', default=9)
+    parser.add_argument(
+      "lines", 
+      type=int, 
+      help='Number of lines', 
+      default=3)
+    
+    parser.add_argument("players", 
+                        type=int, 
+                        help='Number of players', 
+                        default=9)
+    
     parser.add_argument("-p", type=int, help='Number of passes', default=40)
     args = parser.parse_args()
 
