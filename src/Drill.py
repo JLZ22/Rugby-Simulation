@@ -44,14 +44,16 @@ class Drill:
     max_len = max(len(line) for line in self.lines)
     for i in range(max_len):
       for j in range(self.numLines):
-        symbol = ""
         if i < len(self.lines[j]):
           player = self.lines[j][i]
-          if color_ball:
-            symbol = f"\033[93m{player.id}\033[0m" if player.hasBall else player.id
+          symbol = f"{player.id:<11}"
+          if player.hasBall:
+            if color_ball:
+              utils.printYellow(f"{symbol}", end="")
+            else:
+              print(f"{symbol}b", end="")
           else:
-            symbol = f"{player.id}b" if player.hasBall else player.id
-        print(f"{symbol:<11}", end="")
+            print(f"{symbol}", end="")
       print()
     print()
   
