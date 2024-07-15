@@ -23,18 +23,18 @@ class Drill:
   '''
   Runs drill where players pass the ball n times.
   '''
-  def runDrill(self, n: int):
+  def runDrill(self, n: int, color_ball = True):
     self.printDrill()
     for i in range(n):
       self.passBall()
-      self.printDrill(i+1)
+      self.printDrill(i+1, color_ball)
   
   '''
   Prints the drill using * for players without the ball and 
   # for players with the ball.
   '''
-  def printDrill(self, iteration: int = -1):
-    utils.printBlue(utils.boldText(f"Iteration {iteration}:" if iteration != -1 else "Initial State:"))
+  def printDrill(self, iteration: int = -1, color_ball = True):
+    utils.printCyan(utils.boldText(f"Iteration {iteration}:" if iteration != -1 else "Initial State:"))
 
     for i in range(self.numLines):
         txt = utils.underlineText( f"Line {i + 1}:")
@@ -47,7 +47,10 @@ class Drill:
         symbol = ""
         if i < len(self.lines[j]):
           player = self.lines[j][i]
-          symbol = f"{player.id}b" if player.hasBall else player.id
+          if color_ball:
+            symbol = f"\033[93m{player.id}\033[0m" if player.hasBall else player.id
+          else:
+            symbol = f"{player.id}b" if player.hasBall else player.id
         print(f"{symbol:<11}", end="")
       print()
     print()
@@ -123,6 +126,9 @@ class Drill:
     else:  
       self.direction = 'left'
 
+  '''
+  Prints the number of times each player oscillated.
+  '''
   def printOsicllations(self):
     players = self.getAndSortPlayers()
     for player in players:
@@ -131,6 +137,9 @@ class Drill:
       else:
         utils.printGreen(f"Player {player.id} did not oscillate.")
 
+  '''
+  Gets all the players in the drill and sorts them by id.
+  '''
   def getAndSortPlayers(self):
     players = []
     for line in self.lines:
