@@ -4,20 +4,32 @@ def underlineText(text):
 def boldText(text):
     return f"\033[1m{text}\033[0m"
 
-def printRed(text):
-    print(f"\033[91m{text}\033[0m")
+def printRed(*args, **kwargs):
+    print(f"\033[91m", end="")
+    print(*args, **kwargs)
+    print(f"\033[0m", end="")
 
-def printGreen(text):
-    print(f"\033[92m{text}\033[0m")
+def printGreen(*args, **kwargs):
+    print(f"\033[92m", end="")
+    print(*args, **kwargs)
+    print(f"\033[0m", end="")
 
-def printYellow(text):
-    print(f"\033[93m{text}\033[0m")
+def printYellow(*args, **kwargs):
+    print(f"\033[93m", end="")
+    print(*args, **kwargs)
+    print(f"\033[0m", end="")
 
-def printPurple(text):
-    print(f"\033[95m{text}\033[0m")
+def printPurple(*args, **kwargs):
+    print(f"\033[95m", end="")
+    print(*args, **kwargs)
+    print(f"\033[0m", end="")
 
-def printCyan(text):
-    print(f"\033[96m{text}\033[0m")
+def printCyan(*args, **kwargs):
+    print(f"\033[96m", end="")
+    print(*args, **kwargs)
+    print(f"\033[0m", end="")
 
-def printBlue(text):
-    print(f"\033[94m{text}\033[0m")
+def printBlue(*args, **kwargs):
+    print(f"\033[94m", end="")
+    print(*args, **kwargs)
+    print(f"\033[0m", end="")
