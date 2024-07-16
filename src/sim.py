@@ -9,14 +9,13 @@ class RugbySimulator(App):
     """A Textual app to manage stopwatches."""
 
     BINDINGS = [
-        ("d", "toggle_dark", "Toggle dark mode"), # inherited from App
-        ("q", "quit", "Quit the app"), # inherited from App
-        ("r", "run_sim", "Run the simulation"),
-        ("(","decrease_speed","Decrease the speed of simulation"),
-        (")","increase_speed","Increase the speed of simulation"),
-        ("shift+space","pause","Pause the simulation"),
-        ("shift+enter","resume","Resume the simulation"),
-        ("s", "stop", "Stop the simulation"),
+        ("r", "run_sim", "Run"),
+        ("-","decrease_speed","Slower"),
+        ("+","increase_speed","Faster"),
+        ("shift+space","pause_or_resume","Pause/Resume"),
+        ("s", "stop", "Stop"),
+        ("d", "toggle_dark", "Dark mode"), # inherited from App
+        ("q", "quit", "Quit"), # inherited from App
         ]
 
     def compose(self) -> ComposeResult:
@@ -34,11 +33,8 @@ class RugbySimulator(App):
     def action_decrease_speed(self):
         """Decrease the speed of the simulation."""
     
-    def action_pause(self):
+    def action_pause_or_resume(self):
         """Pause the simulation."""
-
-    def action_resume(self):
-        """Resume the simulation."""
 
     def action_stop(self):
         """Stop the simulation."""
