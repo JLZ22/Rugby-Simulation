@@ -4,8 +4,8 @@ from textual.widgets import Static, Label, Input, Pretty
 from textual.validation import Number, Function
 
 class SimulationParameterInput(Static):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.players = 5
         self.lines = 4
         self.iterations = 10
