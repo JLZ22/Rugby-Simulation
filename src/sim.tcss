@@ -1,0 +1,15 @@
+Center {
+    layout: horizontal;
+}
+
+Player {
+    width: 10;
+    text-align: center;
+    text-align: center;
+    border: round cyan; 
+}
+
+Line {
+    width: 10;
+    height: auto;
+}

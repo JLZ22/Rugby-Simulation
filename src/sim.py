@@ -4,6 +4,7 @@ from textual.containers import ScrollableContainer
 from textual.widgets import Header, Footer
 from time import sleep
 from param_input import SimulationParameterInput
+from field import Field, Player
         
 class RugbySimulator(App):
     """A Textual app to manage stopwatches."""
@@ -17,12 +18,15 @@ class RugbySimulator(App):
         ("d", "toggle_dark", "Dark mode"), # inherited from App
         ("q", "quit", "Quit"), # inherited from App
         ]
+    
+    CSS_PATH = "sim.tcss"
 
     def compose(self) -> ComposeResult:
         """Create child widgets for the app."""
         yield Header()
+        yield SimulationParameterInput()
+        yield ScrollableContainer(Field(num_lines=5))
         yield Footer()
-        yield ScrollableContainer(SimulationParameterInput())
 
     def action_run_sim(self):
         """Run the simulation."""
