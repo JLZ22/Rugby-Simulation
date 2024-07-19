@@ -1,6 +1,7 @@
 from textual import on
 from textual.app import ComposeResult
 from textual.widgets import Static, Label, Input, Pretty
+from textual.containers import Center
 from textual.validation import Number, Function
 
 class SimulationParameterInput(Static):
@@ -38,7 +39,7 @@ class SimulationParameterInput(Static):
                     ],
                     id="iterations")
         
-        yield Pretty("Players: 5, Lines: 4, Iterations: 10", id="vals")
+        yield Center(Static(id="vals"))
         
     @on(Input.Changed, "#players")
     def set_players(self, event: Input.Changed):
@@ -66,7 +67,7 @@ class SimulationParameterInput(Static):
 
     @on(Input.Changed)
     def show_vals(self, event: Input.Changed):
-        self.query_one("#vals", Pretty).update(f"Players: {self.players}, Lines: {self.lines}, Iterations: {self.iterations}")
+        self.query_one("#vals", Static).update(f"Players: {self.players}\nLines: {self.lines}\nIterations: {self.iterations}")
 
     def validate_lines(self, value: str) -> bool:
         try:

@@ -12,3 +12,9 @@ Player {
 .column {
     width: 6;
 }
+
+#vals {
+    text-align: center;
+    color: yellow;
+    padding: 2;
+}

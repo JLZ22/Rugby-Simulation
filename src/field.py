@@ -1,5 +1,5 @@
 from textual.widgets import Static
-from textual.containers import (Center, Vertical)
+from textual.containers import Center, Vertical
 from textual.app import RenderResult, ComposeResult
 from textual.reactive import Reactive
 
@@ -39,6 +39,7 @@ class Line(Static):
              for id in self.player_ids])
     
 class Field(Static):
+
     def __init__(self, num_lines: int, num_players: int, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.num_lines = num_lines
