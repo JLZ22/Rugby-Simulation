@@ -6,13 +6,14 @@ from textual.validation import Number, Function
 class SimulationParameterInput(Static):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.players = 5
-        self.lines = 4
+        self.players = 12
+        self.lines = 5
         self.iterations = 10
 
     def compose(self) -> ComposeResult:
         yield Label("Enter the number of players (pos int): ")
-        yield Input(type="integer",
+        yield Input(value=str(self.players),
+                    type="integer",
                     placeholder="Enter an integer: ",
                     validators=[
                         Number(minimum=2)
@@ -20,7 +21,8 @@ class SimulationParameterInput(Static):
                     id="players")
         
         yield Label("Enter the number of lines (less than num players): ")
-        yield Input(type="integer",
+        yield Input(value=str(self.lines),
+                    type="integer",
                     placeholder="Enter an integer: ",
                     validators=[
                         Function(self.validate_lines, "Number of lines must be less than number of players")
@@ -28,7 +30,8 @@ class SimulationParameterInput(Static):
                     id="lines")
         
         yield Label("Enter the number of iterations (pos int): ")
-        yield Input(type="integer",
+        yield Input(value=str(self.iterations),
+                    type="integer",
                     placeholder="Enter an integer: ",
                     validators=[
                         Number(minimum=1)
