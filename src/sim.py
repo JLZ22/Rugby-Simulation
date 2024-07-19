@@ -30,7 +30,6 @@ class RugbySimulator(App):
 
     def action_run_sim(self):
         """Run the simulation."""
-        self.query_one('#player_0', Player)
         
     def action_increase_speed(self):
         """Increase the speed of the simulation."""
