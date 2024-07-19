@@ -16,5 +16,5 @@ Player {
 #vals {
     text-align: center;
     color: yellow;
-    padding: 2;
+    padding: 1;
 }
