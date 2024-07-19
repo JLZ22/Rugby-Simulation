@@ -3,13 +3,18 @@ Center {
 }
 
 Player {
-    width: 10;
+    width: auto;
     text-align: center;
     text-align: center;
     border: round cyan; 
+    background: red;
+    padding: 0 0;
 }
 
-Line {
-    width: 10;
-    height: auto;
+.has_ball{
+    background: red
+}
+
+.column {
+    width: 6;
 }

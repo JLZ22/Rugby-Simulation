@@ -25,7 +25,7 @@ class RugbySimulator(App):
         """Create child widgets for the app."""
         yield Header()
         yield SimulationParameterInput()
-        yield ScrollableContainer(Field(num_lines=5))
+        yield ScrollableContainer(Field(num_lines=5, num_players=20))
         yield Footer()
 
     def action_run_sim(self):
