@@ -25,11 +25,12 @@ class RugbySimulator(App):
         """Create child widgets for the app."""
         yield Header()
         yield SimulationParameterInput()
-        yield ScrollableContainer(Field(num_lines=5, num_players=20))
+        yield ScrollableContainer(Field(num_lines=5, num_players=10))
         yield Footer()
 
     def action_run_sim(self):
         """Run the simulation."""
+        self.query_one('#player_0', Player)
         
     def action_increase_speed(self):
         """Increase the speed of the simulation."""

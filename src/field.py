@@ -1,6 +1,5 @@
-from textual.widget import Widget
 from textual.widgets import Static
-from textual.containers import Center, Vertical
+from textual.containers import (Center, Vertical)
 from textual.app import RenderResult, ComposeResult
 from textual.reactive import Reactive
 
@@ -12,10 +11,7 @@ class Player(Static):
 
     def render(self) -> RenderResult:
         # 🏃‍➡️ 🏃 🏉
-        return "🏃"
-    
-    def watch_text(self):
-        self.update(self.text)
+        return self.text
 
     def add_ball(self):
         self.text += '🏉'
@@ -82,3 +78,5 @@ class Field(Static):
                 to_mount.extend([Vertical(classes='column') for _ in range(3)])
 
         await center_container.mount_all(to_mount)
+
+        self.query_one('#player_0', Player).add_ball()
