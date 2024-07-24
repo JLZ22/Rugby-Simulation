@@ -55,19 +55,23 @@ class Field(Static):
 
         to_mount = []
         num_players_created = 0
+        remainder = self.num_players % self.num_lines
         for i in range(self.num_lines):
-            if i == 0:
-                players_per_line = (self.num_players // self.num_lines + 
-                                    self.num_players % self.num_lines)
-            else:
-                players_per_line = self.num_players // self.num_lines
+            players_per_line = self.num_players // self.num_lines
+
+            # create list of player ids
+            player_ids = []
+            for p in range(num_players_created, 
+                           num_players_created + 
+                           players_per_line + 
+                           (1 if remainder > 0 else 0)):
+                player_ids.append(f'player_{p}')
+            remainder -= 1
 
             # add line to the field
             to_mount.append(
                 Line(line_number=i, 
-                    player_ids=[f'player_{p}' 
-                    for p in range(num_players_created, 
-                    num_players_created + players_per_line)],
+                    player_ids=player_ids,
                     id=f'line_{i}',
                     classes='column'))
             
@@ -80,4 +84,6 @@ class Field(Static):
 
         await center_container.mount_all(to_mount)
 
-        self.query_one('#player_0', Player).add_ball()
+        p = self.query_one('#player_0', Player)
+        if p:
+            p.add_ball()
