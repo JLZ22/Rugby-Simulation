@@ -1,10 +1,8 @@
-from textual import on
+from textual.scroll_view import ScrollView
 from textual.app import App, ComposeResult
-from textual.containers import ScrollableContainer
 from textual.widgets import Header, Footer
-from time import sleep
 from param_input import SimulationParameterInput
-from field import Field, Player
+from field import Field
         
 class RugbySimulator(App):
     """A Textual app to manage stopwatches."""
@@ -25,7 +23,7 @@ class RugbySimulator(App):
         """Create child widgets for the app."""
         yield Header()
         yield SimulationParameterInput()
-        yield ScrollableContainer(Field(num_lines=5, num_players=22))
+        yield ScrollView(Field(num_lines=50, num_players=2200))
         yield Footer()
 
     def action_run_sim(self):
