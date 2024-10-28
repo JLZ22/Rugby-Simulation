@@ -2,12 +2,12 @@ from Drill import Drill
 import utils
 
 if __name__ == "__main__":
-    num_iterations = 1000
+    num_iterations = 1000    
     save = ""
 
     for num_lines in range(2, 101):
         contains_success = False
-        player_range = range(num_lines + 1, num_lines * 10)
+        player_range = range(num_lines + 1, num_lines * 10 + 1)
         txt = f'{num_lines} lines | {num_iterations:,} iterations' + '-' * 25 + '\n'
         save += txt
         print(txt, end="")
