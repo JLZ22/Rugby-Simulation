@@ -148,6 +148,16 @@ Player 5 did not oscillate.
 
 As you can see from the visualization above, Jeff (player 1) passes the ball a total of two times in each instance. When there was an even number of players in line 2, he did not oscillate. However, when there was an odd number of players in line 2, he did oscillate. 
 
-## Approach
+## Brute Force Approach
 
-1. To gain intuition on the problem and potentially observe patterns, I am starting with a brute force approach where I am keeping track of which players oscillate. 
+To gain intuition on the problem and potentially observe patterns, I am starting with a brute force approach where I am keeping track of which players oscillate. 
+
+- For `1 < num_lines < 11` and `num_lines + 1 < num_players < 10 * num_lines` it appears that running the drill for 1000 iterations is sufficient to determine whether a player oscillates or not as the results are consistent with 10,000 and 100,000 iterations.
+
+### Symbols:
+$n$ is the number of lines.
+
+### Observations
+
+1. Let $f(n)$ be the smallest number of players needed to produce a 0 oscillation drill. 
+$$f(n) = 2n - 1 \ \ \ \ \forall n \in [2, 100] \in \mathbb{Z}$$

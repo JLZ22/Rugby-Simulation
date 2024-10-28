@@ -8,31 +8,36 @@ class Player:
     self.currentLine = currentLine
     self.previousLine = None
     self.oscillationCount = 0
+    self.iteration_of_first_oscillation = -1
 
 class Drill:
   def __init__(self, numLines: int, numPlayers: int):
-    assert numLines < numPlayers, "Number of lines must be less than number of players"
-    assert numLines > 0, "Number of lines must be greater than 0"
+    assert numLines < numPlayers + 1, "Number of lines must be less than number of players + 1"
+    assert numLines > 1, "Number of lines must be greater than 1"
     self.numLines = numLines
     self.numPlayers = numPlayers
     self.direction = 'right'
     self.startingLine = 0 # The line that starts with the ball
     self.lineWithBall = 0 # The line that has the ball
     self.lines = [[] for i in range(numLines)] # array of lines
+    self.has_oscillators = False
     self.buildLines() # Distribute players into lines
     
   '''
   Runs drill where players pass the ball n times.
   '''
-  def runDrill(self, 
+  def run(self, 
                n: int, 
                color_ball = True, 
                verbose = True):
-    self.printDrill()
+    if verbose:
+      self.printDrill()
     for i in range(n):
-      self.passBall()
+      self.passBall(i)
       if verbose:
         self.printDrill(i+1, color_ball)
+    
+    return self.has_oscillators
   
   '''
   Prints the drill using * for players without the ball and 
@@ -86,19 +91,19 @@ class Drill:
   Passes the ball from one line to the other in the direction 
   specified by the self.direction
   '''
-  def passBall(self):
+  def passBall(self, iteration: int):
     if self.isLastLine():
       self.flipDirection()
 
     if self.direction == 'left':
-      self.movePlayer(self.lineWithBall, self.lineWithBall - 1)
+      self.movePlayer(self.lineWithBall, self.lineWithBall - 1, iteration)
     else:
-      self.movePlayer(self.lineWithBall, self.lineWithBall + 1)
+      self.movePlayer(self.lineWithBall, self.lineWithBall + 1, iteration)
 
   '''
   Move the first player in the passLine to the end of recieveLine.
   '''
-  def movePlayer(self, passLine: int, recieveLine: int):
+  def movePlayer(self, passLine: int, recieveLine: int, curr_iteration: int):
     if not self.lines[recieveLine]:
       raise Exception(f"Line {recieveLine + 1} is empty! Player in line {passLine + 1} is passing to no one!")
     
@@ -113,6 +118,10 @@ class Drill:
     # update the number of times the player has oscillated
     if (not (passLine == 0 or passLine == self.numLines - 1) and
          curr_player.previousLine == recieveLine):
+      if curr_player.oscillationCount == 0:
+        curr_player.iteration_of_first_oscillation = curr_iteration
+
+      self.has_oscillators = True
       curr_player.oscillationCount += 1
 
     # update the previous and current line of the player
@@ -148,11 +157,15 @@ class Drill:
   '''
   Prints the number of times each player oscillated.
   '''
-  def printOsicllations(self):
+  def printOscillations(self, total_iterations: int):
     players = self.getAndSortPlayers()
     for player in players:
       if player.oscillationCount > 0:
-        utils.printRed(f"Player {player.id} oscillated {player.oscillationCount} times.")
+        percentage = player.oscillationCount / total_iterations * 100
+        percentage_str = f'{percentage:.1f}'
+        s = f"Player {player.id:>3} oscillated {player.oscillationCount:>4} times ({percentage_str:>5}% of the drill). Their first oscillation was on iteration {player.iteration_of_first_oscillation:>3}."
+        
+        utils.printRed(s) if percentage >= 2 else utils.printGreen(s)
       else:
         utils.printGreen(f"Player {player.id} did not oscillate.")
 
@@ -170,19 +183,20 @@ class Drill:
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run a drill.')
     parser.add_argument(
-      "lines", 
+      "--lines", 
       type=int, 
       help='Number of lines', 
-      default=3)
+      default=5)
     
-    parser.add_argument("players", 
+    parser.add_argument("--players", 
                         type=int, 
                         help='Number of players', 
-                        default=9)
+                        default=25)
     
-    parser.add_argument("-p", type=int, help='Number of passes', default=40)
+    parser.add_argument("--passes", type=int, help='Number of passes', default=100)
+
     args = parser.parse_args()
 
     drill = Drill(args.lines, args.players)
-    drill.runDrill(args.p)
-    drill.printOsicllations()
+    drill.run(args.passes)
+    drill.printOscillations(args.passes)
