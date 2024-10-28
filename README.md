@@ -197,3 +197,7 @@ $$\lim_{i \rightarrow \infty} |X_j| \rightarrow \infty$$
     - TODO
 3. Expanding the constraints of conjecture 2 to $\forall p \in [j+1, \infty)$.
     - TODO
+
+### Next Steps
+
+Learn Coq: https://cel.hal.science/inria-00001173v6/document
