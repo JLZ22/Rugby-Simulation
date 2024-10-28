@@ -1,4 +1,4 @@
-from drill import Drill
+from Drill import Drill
 import utils
 
 if __name__ == "__main__":
