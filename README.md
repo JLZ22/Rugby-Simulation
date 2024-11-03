@@ -2,6 +2,12 @@
 
 This is a personal interest project that aims to gain a better understanding of a common Rugby warmup drill called "infinite passing". 
 
+## Dependencies
+
+```bash
+pip install pyyaml
+```
+
 ## What is "Infinite Passing"?
 
 Players will line up in lines (typically no more than 5 or 6) and pass the ball according to the following steps. 
@@ -181,24 +187,15 @@ For each drill with $j$ lines, run the drill using all possible values of $p$ wh
 $$m, m + 1, m + 2 \in X_i$$
 
 2. If we allow $i$ to approach infinity while maintaining our other constraints (namely $p \le 10n$), then 
-$$\lim_{i \rightarrow \infty} |X_j| = 14$$
+$$\lim_{i \rightarrow \infty} |X_2| = 18 \\ \lim_{i \rightarrow \infty} |X_j| = 14, \ \ \forall j > 2$$
 
-. However, $\forall p \in [j+1, \infty)$,
+. However, $\forall p \in [j+1, \infty)$, it appears that
 
 $$\lim_{i \rightarrow \infty} |X_j| \rightarrow \infty$$
 
-### Conjectures 
+. If we restrict $p$ to $p \le c \cdot j$ for some constant $c \mod 10 = 0$, then
 
-1. $\forall j \in [2, 100)$ and $i \rightarrow \infty$ the values of $X_j$ are functions of $j$.
-
-    - Reasoning: 
-        - Observation 1 suggests that the values of $X_j$ are not random (or at least not entirely).
-        - Observation 2 suggests that $|X_j|$ is a function of $j$ and $i$, but for a large enough $i$, it is constant. 
-
-2. Expanding the constraints of conjecture 1 to include $\forall j \in [2, \infty)$.
-    - TODO
-3. Expanding the constraints of conjecture 2 to $\forall p \in [j+1, \infty)$.
-    - TODO
+$$\lim_{i \rightarrow \infty} |X_2| = 2c - 2 \\ \lim_{i \rightarrow \infty} |X_j| = \frac{3c}{2} - 1, \ \ \forall j > 2$$
 
 ### Next Steps
 
