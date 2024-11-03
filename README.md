@@ -186,17 +186,24 @@ For each drill with $j$ lines, run the drill using all possible values of $p$ wh
 
 $$m, m + 1, m + 2 \in X_i$$
 
-2. If we allow $i$ to approach infinity while maintaining our other constraints (namely $p \le 10n$), then 
-$$\lim_{i \rightarrow \infty} |X_2| = 18 \\ \lim_{i \rightarrow \infty} |X_j| = 14, \ \ \forall j > 2$$
+2. $$\lim_{i \rightarrow \infty} |X_2| = 18 \\ \lim_{i \rightarrow \infty} |X_j| = 14, \ \ \forall j > 2$$
 
-. However, $\forall p \in [j+1, \infty)$, it appears that
+#### Going beyond constraints:
 
-$$\lim_{i \rightarrow \infty} |X_j| \rightarrow \infty$$
+3. $\forall p \in [j+1, \infty)$, it appears that
 
-. If we restrict $p$ to $p \le c \cdot j$ for some constant $c \mod 10 = 0$, then
+$$\lim_{i \rightarrow \infty} |X_j| \rightarrow \infty, \ \ \forall j > 1$$
 
-$$\lim_{i \rightarrow \infty} |X_2| = 2c - 2 \\ \lim_{i \rightarrow \infty} |X_j| = \frac{3c}{2} - 1, \ \ \forall j > 2$$
+4. If we restrict $p$ to $p \le c \cdot j$ for some constant $c \mod 10 = 0$, then
+
+$$\lim_{i \rightarrow \infty} |X_2| = 2c - 2 \\ \lim_{i \rightarrow \infty} |X_j| = \frac{3c}{2} - 1, \ \ \forall j \in [3, 20]$$
+
+. This was observed for $c \in [10, 20, 30, 40, 50]$. However, this trend breaks down as we increase either $c$ or $j$.
 
 ### Next Steps
+
+1. Propose an algorithm that will yield all possible values of $p$ that result in a 0 oscillation drill for a given number of lines $j$ and a given maximum number of players $p_{\text{max}}$. 
+    - One version should be able to handle $i \rightarrow \infty$
+    - The second version should be able to handle any positive value of $i$.
 
 Learn Coq: https://cel.hal.science/inria-00001173v6/document
