@@ -1,4 +1,4 @@
-2 lines | 10,000 iterations-------------------------
+2 lines | 1,000 iterations-------------------------
 No oscillations for   3 players.
 No oscillations for   4 players.
 No oscillations for   5 players.
@@ -16,7 +16,8 @@ No oscillations for  16 players.
 No oscillations for  17 players.
 No oscillations for  18 players.
 No oscillations for  19 players.
-3 lines | 10,000 iterations-------------------------
+No oscillations for  20 players.
+3 lines | 1,000 iterations-------------------------
 No oscillations for   5 players.
 No oscillations for   6 players.
 No oscillations for   7 players.
@@ -30,7 +31,8 @@ No oscillations for  23 players.
 No oscillations for  24 players.
 No oscillations for  25 players.
 No oscillations for  29 players.
-4 lines | 10,000 iterations-------------------------
+No oscillations for  30 players.
+4 lines | 1,000 iterations-------------------------
 No oscillations for   7 players.
 No oscillations for   8 players.
 No oscillations for   9 players.
@@ -44,7 +46,8 @@ No oscillations for  31 players.
 No oscillations for  32 players.
 No oscillations for  33 players.
 No oscillations for  39 players.
-5 lines | 10,000 iterations-------------------------
+No oscillations for  40 players.
+5 lines | 1,000 iterations-------------------------
 No oscillations for   9 players.
 No oscillations for  10 players.
 No oscillations for  11 players.
@@ -58,7 +61,8 @@ No oscillations for  39 players.
 No oscillations for  40 players.
 No oscillations for  41 players.
 No oscillations for  49 players.
-6 lines | 10,000 iterations-------------------------
+No oscillations for  50 players.
+6 lines | 1,000 iterations-------------------------
 No oscillations for  11 players.
 No oscillations for  12 players.
 No oscillations for  13 players.
@@ -72,7 +76,8 @@ No oscillations for  47 players.
 No oscillations for  48 players.
 No oscillations for  49 players.
 No oscillations for  59 players.
-7 lines | 10,000 iterations-------------------------
+No oscillations for  60 players.
+7 lines | 1,000 iterations-------------------------
 No oscillations for  13 players.
 No oscillations for  14 players.
 No oscillations for  15 players.
@@ -86,7 +91,8 @@ No oscillations for  55 players.
 No oscillations for  56 players.
 No oscillations for  57 players.
 No oscillations for  69 players.
-8 lines | 10,000 iterations-------------------------
+No oscillations for  70 players.
+8 lines | 1,000 iterations-------------------------
 No oscillations for  15 players.
 No oscillations for  16 players.
 No oscillations for  17 players.
@@ -100,7 +106,8 @@ No oscillations for  63 players.
 No oscillations for  64 players.
 No oscillations for  65 players.
 No oscillations for  79 players.
-9 lines | 10,000 iterations-------------------------
+No oscillations for  80 players.
+9 lines | 1,000 iterations-------------------------
 No oscillations for  17 players.
 No oscillations for  18 players.
 No oscillations for  19 players.
@@ -114,7 +121,8 @@ No oscillations for  71 players.
 No oscillations for  72 players.
 No oscillations for  73 players.
 No oscillations for  89 players.
-10 lines | 10,000 iterations-------------------------
+No oscillations for  90 players.
+10 lines | 1,000 iterations-------------------------
 No oscillations for  19 players.
 No oscillations for  20 players.
 No oscillations for  21 players.
@@ -128,3 +136,10 @@ No oscillations for  79 players.
 No oscillations for  80 players.
 No oscillations for  81 players.
 No oscillations for  99 players.
+No oscillations for 100 players.
+
+
+-------------------------
+
+Line 2: 18 player counts result in no oscillations
+Lines 3-10: 14 player counts result in no oscillations
