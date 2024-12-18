@@ -52,9 +52,9 @@ def run_drills(max_lines: int, max_players_coefficient: int, num_iterations: int
 
     for key, val in range_report.items():
         if val[0] == val[1]:
-            instance_report += f"Line {val[0]}: {key} player counts result in no oscillations\n"
+            instance_report += f"Line {val[0]}: {key} unique player counts result in no oscillations\n"
         else:
-            instance_report += f"Lines {val[0]}-{val[1]}: {key} player counts result in no oscillations\n"
+            instance_report += f"Lines {val[0]}-{val[1]}: {key} unique player counts result in no oscillations\n"
     print(instance_report)
     save += instance_report
     return save
