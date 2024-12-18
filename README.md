@@ -1,4 +1,4 @@
-# Rugby Simulation
+# Rugby Infinite Passing
 
 This is a personal interest project that aims to gain a better understanding of a common Rugby warmup drill called "infinite passing". 
 
